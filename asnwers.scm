@@ -43,3 +43,16 @@
 ; No.7
 (define (subseq seq n m)
   (take (drop seq n) (- m n)))
+
+; No.8
+(define (butlast-n-1 seq n)
+  (if (or (= n 0) (null? seq))
+    seq
+    (butlast-n-1 (butlast seq) (- n 1))))
+
+(define (butlast-n-2 seq n)
+  (let ((len (length seq)))
+    (let ((m (if (> n len)
+              len
+              n)))
+      (take seq (- len m)))))
