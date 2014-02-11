@@ -5,3 +5,14 @@
 ; No.2
 (define (double? seq)
   (and (pair? seq) (single? (cdr seq))))
+
+; No.3
+(define (longer?-1 seq-x seq-y)
+  (> (length seq-x) (length seq-y)))
+
+(define (longer?-2 seq-x seq-y)
+  (if (pair? seq-x) 
+    (if (pair? seq-y)
+      (longer? (cdr seq-x) (cdr seq-y))
+      #t)
+    #f))
