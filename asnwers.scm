@@ -16,3 +16,14 @@
       (longer? (cdr seq-x) (cdr seq-y))
       #t)
     #f))
+
+; No.4
+(define (last seq)
+  (if (null? (cdr seq))
+    seq
+    (last (cdr seq))))
+
+(define (butlast seq)
+  (if (null? (cdr seq))
+    nil
+    (cons (car seq) (butlast (cdr seq)))))
