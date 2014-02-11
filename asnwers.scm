@@ -33,3 +33,9 @@
   (if (and (not (= n 0)) (pair? seq))
     (cons (car seq) (take (cdr seq) (- n 1)))
     nil))
+
+; No.6
+(define (drop seq n)
+  (if (or (= n 0) (null? seq))
+    seq
+    (drop (cdr seq) (- n 1))))
