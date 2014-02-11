@@ -27,3 +27,9 @@
   (if (null? (cdr seq))
     nil
     (cons (car seq) (butlast (cdr seq)))))
+
+; No.5
+(define (take seq n)
+  (if (and (not (= n 0)) (pair? seq))
+    (cons (car seq) (take (cdr seq) (- n 1)))
+    nil))
