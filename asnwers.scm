@@ -39,3 +39,7 @@
   (if (or (= n 0) (null? seq))
     seq
     (drop (cdr seq) (- n 1))))
+
+; No.7
+(define (subseq seq n m)
+  (take (drop seq n) (- m n)))
