@@ -71,3 +71,12 @@
       ((equal? x (car seq)) n)
       (else (count-pos x (cdr seq) (+ n 1)))))
   (count-pos x seq 0))
+
+; No.11
+(define (count x seq)
+  (define (count-x x seq n)
+    (cond
+      ((null? seq) n)
+      ((equal? x (car seq)) (count-x x (cdr seq) (+ n 1)))
+      (else (count-x x (cdr seq) n))))
+  (count-x x seq 0))
