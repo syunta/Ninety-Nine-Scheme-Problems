@@ -56,3 +56,9 @@
               len
               n)))
       (take seq (- len m)))))
+
+; No.9
+(define (group seq n)
+  (if (null? seq)
+    seq
+    (cons (take seq n) (group (drop seq n) n))))
