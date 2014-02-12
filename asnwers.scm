@@ -62,3 +62,12 @@
   (if (null? seq)
     seq
     (cons (take seq n) (group (drop seq n) n))))
+
+; No.10
+(define (position x seq)
+  (define (count-pos x seq n)
+    (cond
+      ((null? seq) #f)
+      ((equal? x (car seq)) n)
+      (else (count-pos x (cdr seq) (+ n 1)))))
+  (count-pos x seq 0))
