@@ -80,3 +80,11 @@
       ((equal? x (car seq)) (count-x x (cdr seq) (+ n 1)))
       (else (count-x x (cdr seq) n))))
   (count-x x seq 0))
+
+; No.12
+(define (sum-list seq)
+  (define (current-sum seq sum)
+    (if (null? seq)
+      sum
+      (current-sum (cdr seq) (+ sum (car seq)))))
+  (current-sum seq 0))
