@@ -88,3 +88,26 @@
       sum
       (current-sum (cdr seq) (+ sum (car seq)))))
   (current-sum seq 0))
+
+; No.13
+(define (max-list seq)
+  (define (max-element seq mx)
+    (cond
+      ((null? seq) mx)
+      ((> (car seq) mx)
+        (max-element (cdr seq) (car seq)))
+      (else (max-element (cdr seq) mx))))
+  (if (null? seq)
+    seq
+    (max-element seq (car seq))))
+
+(define (min-list seq)
+  (define (min-element seq mn)
+    (cond
+      ((null? seq) mn)
+      ((< (car seq) mn)
+        (min-element (cdr seq) (car seq)))
+      (else (min-element (cdr seq) mn))))
+  (if (null? seq)
+    seq
+    (min-element seq (car seq))))
