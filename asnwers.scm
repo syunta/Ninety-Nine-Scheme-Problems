@@ -111,3 +111,10 @@
   (if (null? seq)
     seq
     (min-element seq (car seq))))
+
+; No.14
+(define (adjacent? x y seq)
+  (cond
+    ((or (null? seq) (null? (cdr seq))) #f)
+    ((and (equal? x (car seq)) (equal? y (cadr seq))) #t)
+    (else (adjacent? x y (cdr seq)))))
