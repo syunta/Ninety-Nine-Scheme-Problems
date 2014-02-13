@@ -198,3 +198,16 @@
       ((op (car xs) (car ys))
        (cons (car xs) (merge-list-2 op (cdr xs) ys)))
       (else (cons (car ys) (merge-list-2 op xs (cdr ys))))))
+
+; No.22
+(define (merge-sort op seq)
+  (define (merge-iter op seq)
+    (cond
+      ((null? seq) nil)
+      ((null? (cdr seq)) seq)
+      (else (merge-iter op (cons
+              (merge-list op (car seq) (cadr seq))
+              (merge-iter op (cddr seq)))))))
+  (define (split seq)
+    (group seq 1))
+  (car (merge-iter op (split seq))))
