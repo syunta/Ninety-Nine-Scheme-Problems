@@ -160,3 +160,10 @@
     ((null? x) y)
     ((member (car x) y) (union (cdr x) y))
     (else (cons (car x) (union (cdr x) y)))))
+
+; No.19
+(define (intersection x y)
+  (cond
+    ((null? x) nil)
+    ((member (car x) y) (cons (car x) (intersection (cdr x) y)))
+    (else (intersection (cdr x) y))))
