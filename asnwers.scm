@@ -232,3 +232,14 @@
     ((null? xs) #f)
     ((or (null? ys) (prefix xs ys)) #t)
     (else (sublist (cdr xs) ys))))
+
+; No.26
+(define (member-tree x seq)
+  (define (flat-tree seq)
+    (cond
+      ((null? seq) nil)
+      ((not (pair? seq)) (list seq))
+      (else (append
+              (flat-tree (car seq))
+              (flat-tree (cdr seq))))))
+  (if (member x (flat-tree seq)) #t #f))
