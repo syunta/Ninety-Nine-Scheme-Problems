@@ -143,3 +143,10 @@
   (if (> n m)
     nil
     (cons n (iota (+ n 1) m))))
+
+; No.17
+(define (set-of-list seq)
+  (cond
+    ((null? seq) seq)
+    ((member (car seq) (cdr seq)) (set-of-list (cdr seq)))
+    (else (cons (car seq) (set-of-list (cdr seq))))))
