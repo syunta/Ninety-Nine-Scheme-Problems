@@ -1,4 +1,4 @@
-Ninety-Nine-Prolog-Problems
+Ninety-Nine-Scheme-Problems
 ===========================
 
 scheme practice
