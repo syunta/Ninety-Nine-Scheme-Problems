@@ -118,3 +118,22 @@
     ((or (null? seq) (null? (cdr seq))) #f)
     ((and (equal? x (car seq)) (equal? y (cadr seq))) #t)
     (else (adjacent? x y (cdr seq)))))
+
+; No.15
+(define (before?-1 x y seq)
+  (define (search x-or-y seq y?)
+    (cond
+      ((null? seq) #f)
+      ((equal? x-or-y (car seq)) 
+       (if y?
+         seq
+         (search y (cdr seq) #t)))
+      (else (search x-or-y (cdr seq) y?))))
+  (search x seq #f))
+
+(define (before?-2 x y seq)
+  ((lambda (after-x)
+     (if after-x
+       (member y (cdr after-x))
+       #f))
+   (member x seq)))
