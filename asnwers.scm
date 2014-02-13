@@ -218,3 +218,10 @@
     ((null? ys) #t)
     ((equal? (car xs) (car ys)) (prefix (cdr xs) (cdr ys)))
     (else #f)))
+
+; No.24
+(define (suffix-1 xs ys)
+  (prefix (reverse xs) (reverse ys)))
+
+(define (suffix-2 xs ys)
+  (prefix (drop xs (- (length xs) (length ys))) ys))
