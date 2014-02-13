@@ -211,3 +211,10 @@
   (define (split seq)
     (group seq 1))
   (car (merge-iter op (split seq))))
+
+; No.23
+(define (prefix xs ys)
+  (cond
+    ((null? ys) #t)
+    ((equal? (car xs) (car ys)) (prefix (cdr xs) (cdr ys)))
+    (else #f)))
