@@ -167,3 +167,10 @@
     ((null? x) nil)
     ((member (car x) y) (cons (car x) (intersection (cdr x) y)))
     (else (intersection (cdr x) y))))
+
+; No.20
+(define (difference x y)
+  (cond
+    ((null? x) nil)
+    ((member (car x) y) (difference (cdr x) y))
+    (else (cons (car x) (difference (cdr x) y)))))
