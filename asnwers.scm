@@ -225,3 +225,10 @@
 
 (define (suffix-2 xs ys)
   (prefix (drop xs (- (length xs) (length ys))) ys))
+
+; No.25
+(define (sublist xs ys)
+  (cond
+    ((null? xs) #f)
+    ((or (null? ys) (prefix xs ys)) #t)
+    (else (sublist (cdr xs) ys))))
