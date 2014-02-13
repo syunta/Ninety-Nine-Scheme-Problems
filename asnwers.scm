@@ -137,3 +137,9 @@
        (member y (cdr after-x))
        #f))
    (member x seq)))
+
+; No.16
+(define (iota n m)
+  (if (> n m)
+    nil
+    (cons n (iota (+ n 1) m))))
