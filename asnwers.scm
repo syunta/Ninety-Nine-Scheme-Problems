@@ -150,3 +150,13 @@
     ((null? seq) seq)
     ((member (car seq) (cdr seq)) (set-of-list (cdr seq)))
     (else (cons (car seq) (set-of-list (cdr seq))))))
+
+; No.18
+(define (union-1 x y)
+  (set-of-list (append x y)))
+
+(define (union-2 x y)
+  (cond
+    ((null? x) y)
+    ((member (car x) y) (union (cdr x) y))
+    (else (cons (car x) (union (cdr x) y)))))
