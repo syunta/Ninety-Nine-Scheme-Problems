@@ -174,3 +174,27 @@
     ((null? x) nil)
     ((member (car x) y) (difference (cdr x) y))
     (else (cons (car x) (difference (cdr x) y)))))
+
+; No.21
+(define (merge-list-1 op xs ys)
+  (define (merge-x op xs ys)
+    (cond
+      ((null? ys) xs)
+      ((op (car ys) (car xs))
+       (cons (car ys) (merge-x op xs (cdr ys))))
+      (else (cons (car xs) (merge-y op (cdr xs) ys)))))
+  (define (merge-y op xs ys)
+    (cond
+      ((null? xs) ys)
+      ((op (car xs) (car ys))
+       (cons (car xs) (merge-y op (cdr xs) ys)))
+      (else (cons (car ys) (merge-x op xs (cdr ys))))))
+  (merge-y op xs ys))
+
+(define (merge-list-2 op xs ys)
+    (cond
+      ((null? xs) ys)
+      ((null? ys) xs)
+      ((op (car xs) (car ys))
+       (cons (car xs) (merge-list-2 op (cdr xs) ys)))
+      (else (cons (car ys) (merge-list-2 op xs (cdr ys))))))
