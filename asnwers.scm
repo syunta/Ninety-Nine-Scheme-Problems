@@ -250,3 +250,13 @@
     ((null? seq) 0)
     ((not (pair? seq)) 1)
     (else (+ (count-leaf (car seq)) (count-leaf (cdr seq))))))
+
+; No.28
+(define (subst x y seq)
+  (cond
+    ((null? seq) nil)
+    ((not (pair? seq))
+     (if (equal? x seq)
+       y
+       seq))
+    (else (cons (subst x y (car seq)) (subst x y (cdr seq))))))
