@@ -243,3 +243,10 @@
               (flat-tree (car seq))
               (flat-tree (cdr seq))))))
   (if (member x (flat-tree seq)) #t #f))
+
+; No.27
+(define (count-leaf seq)
+  (cond
+    ((null? seq) 0)
+    ((not (pair? seq)) 1)
+    (else (+ (count-leaf (car seq)) (count-leaf (cdr seq))))))
