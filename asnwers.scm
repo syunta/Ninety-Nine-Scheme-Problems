@@ -281,3 +281,14 @@
                     (lambda (y) (cons x y))
                     (permutation-n (- n 1) (difference seq (list x)))))
       seq))))
+
+; No.30
+(define (repeat-perm n seq)
+  (cond
+    ((zero? n) (list nil))
+    ((null? seq) (list nil))
+    (else (flatmap
+      (lambda (x) (map 
+                    (lambda (y) (cons x y))
+                    (repeat-perm (- n 1) seq)))
+      seq))))
