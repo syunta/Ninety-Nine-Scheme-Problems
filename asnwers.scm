@@ -271,3 +271,13 @@
                     (lambda (y) (cons x y))
                     (permutation (difference seq (list x)))))
       seq))))
+
+(define (permutation-n n seq)
+  (cond
+    ((zero? n) (list nil))
+    ((null? seq) (list nil))
+    (else (flatmap
+      (lambda (x) (map 
+                    (lambda (y) (cons x y))
+                    (permutation-n (- n 1) (difference seq (list x)))))
+      seq))))
