@@ -260,3 +260,14 @@
        y
        seq))
     (else (cons (subst x y (car seq)) (subst x y (cdr seq))))))
+
+; No.29
+(define (permutation seq)
+  (cond
+    ((null? seq) nil)
+    ((null? (cdr seq)) (list seq))
+    (else (flatmap
+      (lambda (x) (map 
+                    (lambda (y) (cons x y))
+                    (permutation (difference seq (list x)))))
+      seq))))
