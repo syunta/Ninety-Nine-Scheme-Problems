@@ -307,3 +307,16 @@
   (if (or (zero? r) (equal? r n))
     1
     (* (comb-num-2 n (- r 1)) (/ (+ (- n r) 1) r))))
+
+; No.32
+(define (combination n seq)
+  (cond
+    ((zero? n) (list nil))
+    ((null? seq) (list nil))
+    (else (flatmap
+      (lambda (x) (if (>= (length (cdr (member x seq))) (- n 1))
+                    (map 
+                      (lambda (y) (cons x y))
+                      (combination (- n 1) (cdr (member x seq))))
+                    nil))
+      seq))))
