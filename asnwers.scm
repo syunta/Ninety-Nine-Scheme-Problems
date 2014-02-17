@@ -320,3 +320,14 @@
                       (combination (- n 1) (cdr (member x seq))))
                     nil))
       seq))))
+
+; No.33
+(define (repeat-comb n seq)
+  (cond
+    ((zero? n) (list nil))
+    ((null? seq) (list nil))
+    (else (flatmap
+      (lambda (x) (map 
+                    (lambda (y) (cons x y))
+                    (repeat-comb (- n 1) (member x seq))))
+      seq))))
