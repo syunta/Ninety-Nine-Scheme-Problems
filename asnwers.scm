@@ -292,3 +292,18 @@
                     (lambda (y) (cons x y))
                     (repeat-perm (- n 1) seq)))
       seq))))
+
+; No.31
+(define (comb-num-1 n r)
+  (define (factorial n)
+    (if (zero? n)
+      1
+      (* n (factorial (- n 1)))))
+  (define (perm-num n r)
+    (/ (factorial n) (factorial (- n r))))
+  (/ (perm-num n r) (factorial r)))
+
+(define (comb-num-2 n r)
+  (if (or (zero? r) (equal? r n))
+    1
+    (* (comb-num-2 n (- r 1)) (/ (+ (- n r) 1) r))))
