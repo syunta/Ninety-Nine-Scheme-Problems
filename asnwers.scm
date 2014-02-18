@@ -331,3 +331,14 @@
                     (lambda (y) (cons x y))
                     (repeat-comb (- n 1) (member x seq))))
       seq))))
+
+; No.34
+(define (split-nth-1 seq n)
+  (values (take seq n) (drop seq n)))
+
+(define (split-nth-2 seq n)
+  (define (split seq n front)
+    (cond
+      ((or (null? seq) (zero? n)) (values (reverse front) seq))
+      (else (split (cdr seq) (- n 1) (cons (car seq) front)))))
+  (split seq n nil))
