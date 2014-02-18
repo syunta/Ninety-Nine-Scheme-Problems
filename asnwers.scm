@@ -375,3 +375,14 @@
        (values (reverse front) seq))
       (else (split-rec x (cdr seq) (cons (car seq) front)))))
   (split-rec x seq nil))
+
+; No.37
+(define (split-ge x seq)
+  (define (split-rec seq x low high)
+    (cond
+      ((null? seq) (values (reverse low) (reverse high)))
+      ((>= x (car seq))
+       (split-rec (cdr seq) x (cons (car seq) low) high))
+      (else
+       (split-rec (cdr seq) x low (cons (car seq) high)))))
+  (split-rec seq x nil nil))
