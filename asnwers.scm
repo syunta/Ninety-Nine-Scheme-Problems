@@ -314,11 +314,11 @@
     ((zero? n) (list nil))
     ((null? seq) (list nil))
     (else (flatmap
-      (lambda (x) (if (>= (length (cdr (member x seq))) (- n 1))
+      (lambda (x) (if (< (length (cdr (member x seq))) (- n 1))
+                    nil
                     (map 
                       (lambda (y) (cons x y))
-                      (combination (- n 1) (cdr (member x seq))))
-                    nil))
+                      (combination (- n 1) (cdr (member x seq))))))
       seq))))
 
 ; No.33
