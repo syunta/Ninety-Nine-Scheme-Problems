@@ -366,3 +366,12 @@
       (else
        (partition-rec (cdr seq) (+ n 1) odds (cons (car seq) evens)))))
   (partition-rec seq 0 nil nil))
+
+; No.36
+(define (split-find x seq)
+  (define (split-rec x seq front)
+    (cond
+      ((or (null? seq) (equal? x (car seq)))
+       (values (reverse front) seq))
+      (else (split-rec x (cdr seq) (cons (car seq) front)))))
+  (split-rec x seq nil))
