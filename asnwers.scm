@@ -342,3 +342,27 @@
       ((or (null? seq) (zero? n)) (values (reverse front) seq))
       (else (split (cdr seq) (- n 1) (cons (car seq) front)))))
   (split seq n nil))
+
+; No.35
+(define (partition-1 seq)
+  (define (odds seq n)
+    (cond
+      ((null? seq) nil)
+      ((not (equal? (remainder n 2) 0)) (odds (cdr seq) (+ n 1)))
+      (else (cons (car seq) (odds (cdr seq) (+ n 1))))))
+  (define (evens seq n)
+    (cond
+      ((null? seq) nil)
+      ((not (equal? (remainder n 2) 1)) (evens (cdr seq) (+ n 1)))
+      (else (cons (car seq) (evens (cdr seq) (+ n 1))))))
+  (values (odds seq 0) (evens seq 0)))
+
+(define (partition-2 seq)
+  (define (partition-rec seq n odds evens)
+    (cond
+      ((null? seq) (values (reverse odds) (reverse evens)))
+      ((equal? 0 (remainder n 2))
+       (partition-rec (cdr seq) (+ n 1) (cons (car seq) odds) evens))
+      (else
+       (partition-rec (cdr seq) (+ n 1) odds (cons (car seq) evens)))))
+  (partition-rec seq 0 nil nil))
