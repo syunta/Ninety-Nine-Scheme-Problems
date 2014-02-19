@@ -386,3 +386,13 @@
       (else
        (split-rec (cdr seq) x low (cons (car seq) high)))))
   (split-rec seq x nil nil))
+
+; No.38
+(define (pack seq)
+  (define (pack-iter seq x xs packed)
+    (cond
+      ((null? seq) (reverse (cons xs packed)))
+      ((equal? x (car seq))
+       (pack-iter (cdr seq) x (cons x xs) packed))
+      (else (pack-iter seq (car seq) nil (cons xs packed)))))
+  (pack-iter seq (car seq) nil nil))
