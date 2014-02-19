@@ -396,3 +396,18 @@
        (pack-iter (cdr seq) x (cons x xs) packed))
       (else (pack-iter seq (car seq) nil (cons xs packed)))))
   (pack-iter seq (car seq) nil nil))
+
+; No.39
+(define (pack-num-list seq)
+  (define (pnl-iter seq x top packed)
+    (cond
+      ((null? seq) (if (equal? x top)
+                     (reverse (cons top packed))
+                     (reverse (cons (cons top x) packed))))
+      ((equal? (+ x 1) (car seq))
+       (pnl-iter (cdr seq) (car seq) top packed))
+      ((equal? x top) 
+       (pnl-iter (cdr seq) (car seq) (car seq) (cons top packed)))
+      (else
+        (pnl-iter (cdr seq) (car seq) (car seq) (cons (cons top x) packed)))))
+  (pnl-iter (cdr seq) (car seq) (car seq) nil))
