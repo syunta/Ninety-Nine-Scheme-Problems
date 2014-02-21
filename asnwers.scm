@@ -427,3 +427,7 @@
        (enl-iter (cdr seq) (append (serialize (car seq)) expanded)))
       (else (enl-iter (cdr seq) (cons (car seq) expanded)))))
   (enl-iter seq nil))
+
+; No.41
+(define (encode seq)
+  (map (lambda (xs) (cons (car xs) (length xs))) (pack seq)))
