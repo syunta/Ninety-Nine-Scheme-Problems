@@ -454,3 +454,16 @@
   (define (serialize pair)
     (serialize-iter (car pair) (cdr pair) nil))
   (flatmap serialize seq))
+
+; No.43
+(define (any? pred seq)
+  (cond
+    ((null? seq) #f)
+    ((pred (car seq)) #t)
+    (else (any? pred (cdr seq)))))
+
+(define (every? pred seq)
+  (cond
+    ((null? seq) #t)
+    ((not (pred (car seq))) #f)
+    (else (every? pred (cdr seq)))))
