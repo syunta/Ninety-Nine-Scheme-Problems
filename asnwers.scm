@@ -487,3 +487,16 @@
       (reverse mapped)
       (maplist-iter proc (cdr seq) (cons (proc seq) mapped))))
   (maplist-iter proc seq nil))
+
+; No.45
+(define (for-each-list-1 proc op initial seq)
+  (define (accumulate op seq accumulated)
+    (if (null? seq)
+      accumulated
+      (accumulate op (cdr seq) (op accumulated (car seq) ))))
+  (accumulate op (map proc seq) initial))
+
+(define (for-each-list-2 proc op initial seq)
+  (if (null? seq)
+    initial
+    (op (proc (car seq)) (for-each-list-2 proc op initial (cdr seq)))))
