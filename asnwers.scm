@@ -431,3 +431,26 @@
 ; No.41
 (define (encode seq)
   (map (lambda (xs) (cons (car xs) (length xs))) (pack seq)))
+
+; No.42
+(define (decode-1 seq)
+  (define (serialize-iter x n seq)
+    (if (zero? n)
+      seq
+      (serialize-iter x (- n 1) (cons x seq))))
+  (define (serialize pair)
+    (serialize-iter (car pair) (cdr pair) nil))
+  (define (decode-iter seq decoded)
+    (if (null? seq)
+      decoded
+      (decode-iter (cdr seq) (append decoded (serialize (car seq))))))
+  (decode-iter seq nil))
+
+(define (decode-2 seq)
+  (define (serialize-iter x n seq)
+    (if (zero? n)
+      seq
+      (serialize-iter x (- n 1) (cons x seq))))
+  (define (serialize pair)
+    (serialize-iter (car pair) (cdr pair) nil))
+  (flatmap serialize seq))
