@@ -411,3 +411,19 @@
       (else
         (pnl-iter (cdr seq) (car seq) (car seq) (cons (cons top x) packed)))))
   (pnl-iter (cdr seq) (car seq) (car seq) nil))
+
+; No.40
+(define (expand-num-list seq)
+  (define (serialize-iter x end seq)
+    (if (equal? x end)
+      seq
+      (serialize-iter (+ x 1) end (cons (+ x 1) seq))))
+  (define (serialize pair)
+    (serialize-iter (car pair) (cdr pair) (list (car pair))))
+  (define (enl-iter seq expanded)
+    (cond
+      ((null? seq) (reverse expanded))
+      ((pair? (car seq))
+       (enl-iter (cdr seq) (append (serialize (car seq)) expanded)))
+      (else (enl-iter (cdr seq) (cons (car seq) expanded)))))
+  (enl-iter seq nil))
