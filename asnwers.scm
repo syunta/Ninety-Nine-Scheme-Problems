@@ -467,3 +467,23 @@
     ((null? seq) #t)
     ((not (pred (car seq))) #f)
     (else (every? pred (cdr seq)))))
+
+; No.44
+(define (maplist-1 proc seq)
+  (define (make-list seq maked)
+    (if (null? seq)
+      (reverse maked)
+      (make-list (cdr seq) (cons seq maked))))
+  (map proc (make-list seq nil)))
+
+(define (maplist-2 proc seq)
+  (if (null? seq)
+    nil
+    (cons (proc seq) (maplist-2 proc (cdr seq)))))
+
+(define (maplist-3 proc seq)
+  (define (maplist-iter proc seq mapped)
+    (if (null? seq)
+      (reverse mapped)
+      (maplist-iter proc (cdr seq) (cons (proc seq) mapped))))
+  (maplist-iter proc seq nil))
