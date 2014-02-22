@@ -283,15 +283,30 @@
       seq))))
 
 ; No.30
-(define (repeat-perm n seq)
+(define (repeat-perm-1 n seq)
   (cond
     ((zero? n) (list nil))
     ((null? seq) (list nil))
     (else (flatmap
       (lambda (x) (map 
                     (lambda (y) (cons x y))
-                    (repeat-perm (- n 1) seq)))
+                    (repeat-perm-1 (- n 1) seq)))
       seq))))
+
+(define (repeat-perm-2 n seq)
+  (define (perm-iter n seq p)
+    (cond
+      ((eq? n 0) p)
+      (else
+        (perm-iter
+          (- n 1)
+          seq
+          (flatmap
+            (lambda (x) (map
+                          (lambda (y) (cons x y))
+                          p))
+            seq)))))
+  (perm-iter n seq (list nil)))
 
 ; No.31
 (define (comb-num-1 n r)
