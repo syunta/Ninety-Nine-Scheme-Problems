@@ -500,3 +500,14 @@
   (if (null? seq)
     initial
     (op (proc (car seq)) (for-each-list-2 proc op initial (cdr seq)))))
+
+; No.46
+(define (my-map proc seq)
+  (for-each-list proc cons nil seq))
+
+(define (my-filter pred seq)
+  (for-each-list
+    (lambda (x) (if (pred x) (list x) nil)) append nil seq))
+
+(define (my-accumulate op initial seq)
+  (for-each-list (lambda (x) x) op initial seq))
