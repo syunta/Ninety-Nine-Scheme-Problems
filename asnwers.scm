@@ -526,3 +526,17 @@
 
 (define (my-accumulate op initial seq)
   (for-each-list (lambda (x) x) op initial seq))
+
+; No.47
+(define (Komachi-function)
+  (define (divide-Komachi x y z)
+    (/ x (+ (* y 10) z)))
+  (define (calc-Komachi seq)
+    (accumulate
+      + 0 (map
+            (lambda (xs) (apply divide-Komachi xs))
+            (group seq 3))))
+  (define (Komachi? seq)
+    (and (integer? (/ 1 (calc-Komachi seq)))
+         (< (list-ref seq 0) (list-ref seq 3) (list-ref seq 6)))) ;reproduced
+  (filter Komachi? (permutation 9 (iota 1 9))))
