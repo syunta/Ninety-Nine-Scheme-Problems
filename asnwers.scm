@@ -555,3 +555,26 @@
                     (lambda (indexes) (apply + (make-line seq indexes)))
                     check-index)))
   (filter safe? (permutation 9 (iota 1 9))))
+
+; No.49
+
+;  W R O N G  (M W R O N G I H T)
+; *        M  (0 1 2 3 4 5 6 7 8)
+; ----------
+;  R I G H T
+
+(define (alphametic)
+  (define formula  '(0 1 2 3 4 5))
+  (define solution '(2 6 5 7 8))
+  (define (calc-word w o r d s)
+    (+ (* w 10000) (* o 1000) (* r 100) (* d 10) s))
+  (define (calc-formula m w r o n g)
+    (* m (calc-word w r o n g)))
+  (define (calc-solution r i g h t)
+    (calc-word r i g h t))
+  (define (select seq indexes)
+    (map (lambda (index) (list-ref seq index)) indexes))
+  (define (safe? seq)
+    (eq? (apply calc-formula  (select seq formula))
+         (apply calc-solution (select seq solution))))
+  (filter safe? (permutation 9 (iota 1 9))))
