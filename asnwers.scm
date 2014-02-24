@@ -540,3 +540,18 @@
     (and (integer? (/ 1 (calc-Komachi seq)))
          (< (list-ref seq 0) (list-ref seq 3) (list-ref seq 6)))) ;reproduced
   (filter Komachi? (permutation 9 (iota 1 9))))
+
+; No.48
+(define (magic-circle)
+  (define check-index '((0 1 2) (3 4 5) (6 7 8)
+                        (0 3 6) (1 4 7) (2 5 8)
+                        (0 4 8) (2 4 6)))
+  (define (equal-lines? seq)
+    (every? (lambda (x) (eq? x (car seq))) seq))
+  (define (make-line seq indexes)
+    (map (lambda (x) (list-ref seq x)) indexes))
+  (define (safe? seq)
+    (equal-lines? (map
+                    (lambda (indexes) (apply + (make-line seq indexes)))
+                    check-index)))
+  (filter safe? (permutation 9 (iota 1 9))))
