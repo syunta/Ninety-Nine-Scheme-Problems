@@ -578,3 +578,23 @@
     (eq? (apply calc-formula  (select seq formula))
          (apply calc-solution (select seq solution))))
   (filter safe? (permutation 9 (iota 1 9))))
+
+; No.50
+(define (sieve n)
+  (define (prime? n)
+    (define (divides? x y)
+      (= (remainder y x) 0))
+    (define (find-divisor n test-divisor)
+      (cond
+        ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ test-divisor 1)))))
+    (define (smallest-divisor n)
+      (find-divisor n 2))
+    (= n (smallest-divisor n)))
+  (define (sieve-iter x primes)
+    (cond
+      ((> x n) (reverse primes))
+      ((prime? x) (sieve-iter (+ x 1) (cons x primes)))
+      (else (sieve-iter (+ x 1) primes))))
+  (sieve-iter 2 nil))
