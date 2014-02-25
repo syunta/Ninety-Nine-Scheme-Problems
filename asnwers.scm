@@ -606,3 +606,14 @@
 ; No.52
 (define (half-adder p q)
   (values (xor p q) (and p q)))
+
+; No.53
+(define (full-adder-1 p q r)
+  (values
+    (or (and p q) (and (or p q) r))
+    (xor (xor p q) r)))
+
+(define (full-adder-2 p q r)
+  (receive (a b) (half-adder p q)
+    (receive (c d) (half-adder a r)
+      (values c (or b d)))))
