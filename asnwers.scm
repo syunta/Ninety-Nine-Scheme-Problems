@@ -598,3 +598,7 @@
       ((prime? x) (sieve-iter (+ x 1) (cons x primes)))
       (else (sieve-iter (+ x 1) primes))))
   (sieve-iter 2 nil))
+
+; No.51
+(define (xor p q)
+  (or (and (not p) q) (and p (not q))))
