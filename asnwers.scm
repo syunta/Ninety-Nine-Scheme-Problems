@@ -602,3 +602,7 @@
 ; No.51
 (define (xor p q)
   (or (and (not p) q) (and p (not q))))
+
+; No.52
+(define (half-adder p q)
+  (values (xor p q) (and p q)))
