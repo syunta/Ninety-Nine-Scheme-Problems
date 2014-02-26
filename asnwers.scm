@@ -617,3 +617,16 @@
   (receive (a b) (half-adder p q)
     (receive (c d) (half-adder a r)
       (values c (or b d)))))
+
+; No.54
+(define (int->uint int n)
+  (let iter ((int int) (n n) (uint nil))
+    (if (= n 0)
+      uint
+      (iter (quotient int 2) (- n 1) (cons (odd? int) uint)))))
+
+(define (uint->int uint)
+  (let iter ((uint uint) (n (- (length uint) 1)))
+    (cond ((< n 0) 0)
+          ((car uint) (+ (expt 2 n) (iter (cdr uint) (- n 1))))
+          (else (iter (cdr uint) (- n 1))))))
