@@ -630,3 +630,16 @@
     (cond ((< n 0) 0)
           ((car uint) (+ (expt 2 n) (iter (cdr uint) (- n 1))))
           (else (iter (cdr uint) (- n 1))))))
+
+; No.55
+(define (uint-and xs ys)
+  (map (lambda (x y) (and x y)) xs ys))
+
+(define (uint-or xs ys)
+  (map (lambda (x y) (or x y)) xs ys))
+
+(define (uint-xor xs ys)
+  (map (lambda (x y) (xor x y)) xs ys))
+
+(define (uint-not xs)
+  (map (lambda (x) (not x)) xs))
