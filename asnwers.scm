@@ -643,3 +643,12 @@
 
 (define (uint-not xs)
   (map (lambda (x) (not x)) xs))
+
+; No.56
+(define (uint-add xs ys)
+  (cond ((or (null? xs) (null? ys))
+         (values nil #f))
+        (else
+          (receive (seq r) (uint-add (cdr xs) (cdr ys))
+          (receive (s c) (full-adder (car xs) (car ys) r)
+                   (values (cons s seq) c))))))
