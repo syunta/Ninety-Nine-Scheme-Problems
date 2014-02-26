@@ -652,3 +652,11 @@
           (receive (seq r) (uint-add (cdr xs) (cdr ys))
           (receive (s c) (full-adder (car xs) (car ys) r)
                    (values (cons s seq) c))))))
+
+; No.57
+(define (uint-inc xs)
+  (cond ((null? xs) (values nil #t))
+        (else
+          (receive (seq r) (uint-inc (cdr xs))
+          (receive (s c) (full-adder (car xs) #f r)
+                   (values (cons s seq) c))))))
