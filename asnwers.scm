@@ -660,3 +660,9 @@
           (receive (seq r) (uint-inc (cdr xs))
           (receive (s c) (full-adder (car xs) #f r)
                    (values (cons s seq) c))))))
+
+; No.58
+(define (uint-sub xs ys)
+  (receive (complement+1 crry) (uint-inc (uint-not ys))
+    (receive (result crry) (uint-add xs complement+1)
+             (values result (not crry)))))
