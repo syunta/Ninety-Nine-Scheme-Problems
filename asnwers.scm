@@ -666,3 +666,16 @@
   (receive (complement+1 crry) (uint-inc (uint-not ys))
     (receive (result crry) (uint-add xs complement+1)
              (values result (not crry)))))
+
+; No.59
+(define (uint-srl xs)
+  (define (shift xs result)
+    (if (null? (cdr xs))
+      (values (reverse result) (car xs))
+      (shift (cdr xs) (cons (car xs) result))))
+  (receive (shifted lsb) (shift xs nil)
+           (values (cons #f shifted) lsb)))
+
+(define (uint-sll xs)
+  (values (append (cdr xs) (list #f))
+          (car xs)))
